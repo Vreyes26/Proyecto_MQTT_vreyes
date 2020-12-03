@@ -34,15 +34,17 @@
 #define TOPIC_SENSOR "vghyF5od2LPHke6/sensor"
 #define TOPIC_MENSAJE "vghyF5od2LPHke6/mensaje"
 #define TOPIC_MOV "vghyF5od2LPHke6/mov"
+#define TOPIC_VIB "vghyF5od2LPHke6/vib"
+#define TOPIC_VIBOFF "vghyF5od2LPHke6/vibOff"
 
 char ssid[50];
 char pass[50];
 
 Servo servoMotor;
-const int pinboton = 5;---//D1
-const int led = 16;-------//D0
-const int servo = 4;------//D2
-const int vibrador = 13;--//D7
+const int pinboton = 5;//-----D1
+const int led = 16;//---------D0
+const int servo = 4;//--------D2
+const int vibrador = 13;//----D7
 int estado;
 int value = 0;
 String mensaje = "";
@@ -63,7 +65,8 @@ String pagina = "<!DOCTYPE html>"
 "<title>Configuracion WiFi Proyecto Vreyes</title>"
 "<meta charset='UTF-8'>"
 "</head>"
-"<body style='background-color:black; color:white; text-align:center;'>"
+"<body style='background-color:black; color:white; text-align:center;"
+  "text-shadow: 2px 2px 3px #FFFFFF;'>"
 "<h1>Configuracion Proyecto vreyes_01</h1>"
 "</form>"
 "<form action='guardar_config' method='get'>"
@@ -187,6 +190,8 @@ void config_wifi(){
 
 void callback(char* topic, byte* payload, unsigned int length) {
   String string;
+  String stringVib;
+  Serial.println("");
   Serial.print("Message recibido [");
   Serial.print(topic);
   Serial.print("] ");
@@ -199,6 +204,8 @@ void callback(char* topic, byte* payload, unsigned int length) {
   String topicoSensor = TOPIC_SENSOR;
   String topicoMensaje = TOPIC_MENSAJE;
   String topicoMov = TOPIC_MOV;
+  String topicoVib = TOPIC_VIB;
+  String topicoVibOff = TOPIC_VIBOFF;
 
   //TOPICO MOTOR
   if(topico == topicoMotor){
@@ -250,6 +257,22 @@ void callback(char* topic, byte* payload, unsigned int length) {
     }
   }
 
+  //TOPICO VIBRADOR
+  if(topico == topicoVib){
+    for (int i = 0; i < length; i++) {
+      stringVib+=((char)payload[i]);
+    }
+    int resultado = stringVib.toInt();
+    analogWrite(vibrador, resultado);
+  }
+
+  //TOPICO APAGAR VIBRADOR
+  if(topico == topicoVibOff){
+    if((char)payload[0] == '1'){
+      analogWrite(vibrador, LOW);
+    }
+  }
+
   //MUESTRA MENSAJE GENERAL RECIBIDO
   for (int i = 0; i < length; i++) {
     string+=((char)payload[i]);
@@ -266,8 +289,7 @@ void reconnect() {
     clientId += String(random(0xffff), HEX);
     if (client.connect(clientId.c_str(),"TR3oNPxXnCEzopw", "mPhIlrLrLkwAVnq")) {
       Serial.println("conectado");
-      client.publish(TOPIC_MENSAJE, "reconectando");
-      client.subscribe("vghyF5od2LPHke6/#");
+      client.subscribe("vghyF5od2LPHke6/+");
     } else {
       Serial.print("fallido, rc=");
       Serial.print(client.state());
@@ -282,6 +304,7 @@ void setup() {
   EEPROM.begin(512);
   pinMode(pinboton, INPUT);
   pinMode(led, OUTPUT);
+  pinMode(vibrador, OUTPUT);
   servoMotor.attach(servo);
   client.setServer(servidor, 1883);
   client.setCallback(callback);
