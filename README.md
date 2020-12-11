@@ -3,6 +3,7 @@ _Proyecto mqtt esp8266 para el envio y recivo de comandos y mensajeria_
 
 ## INSTRUCCIONES 
 Conexion WiFi manual atravez de WiFi directo del NODEMCU, se ingresara a la pagina web con la ip: "http://192.168.4.1/" 
+
 ![Imagen de ejemplo de pagina](pagina.png)
 
 la cual es configurada luego de presionar el boton antes de 10 segundos iniciado el proyecto estos datos se guardan en una memoria EEPROM la cual hara que luego de reiniciar el proyecto, se conecte a la red WiFi establecida automaticamente
