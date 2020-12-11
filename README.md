@@ -21,6 +21,8 @@ Luego en "Import/Export" Ingresar el topico:
 ```
 vghyF5od2LPHke6/config/parametros
 ```
-y seleccionar **"subscribe and wait for metrics"** para obtener los botones ya configurados
+
+y seleccionar *"subscribe and wait for metrics"* para obtener los botones ya configurados
+
 ---
 Proyecto hecho por [Vreyes26](https://github.com/Vreyes26/Proyecto_MQTT_vreyes)
