@@ -6,9 +6,9 @@ Una conexion WiFi manual atravez de WiFi directo del NODEMCU, se ingresara a la 
 mediante una conexion atravez de la aplicacion MQTT Dash de Google Playstore https://play.google.com/store/apps/details?id=net.routix.mqttdash&hl=es_419&gl=US
 Se realizara la conexion mediante los siguientes parametros ingresados:
 
-´´´
+```
 * Address: ioticos.org
 * 
-´´´
-
+```
+---
 Proyecto hecho por [Vreyes26](https://github.com/Vreyes26/Proyecto_MQTT_vreyes)
