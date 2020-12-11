@@ -25,7 +25,7 @@ vghyF5od2LPHke6/config/parametros
 y seleccionar *"subscribe and wait for metrics"* para obtener los botones ya configurados
 
 ## Diagrama del proyecto
-[imagen diagrama proyecto](diagrama_proyecto.jpg)
+![imagen diagrama proyecto](diagrama_proyecto.jpg)
 
 ---
 Proyecto hecho por [Vreyes26](https://github.com/Vreyes26/Proyecto_MQTT_vreyes)
